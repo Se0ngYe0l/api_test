@@ -41,6 +41,29 @@ async def runModel(crim: float, room: float) -> List[float]:
   
   return result
 
+import paramiko
+
+def send_text_to_local_machine(text_data):
+    # SSH 클라이언트를 사용하여 로컬 머신에 연결
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname="<local-machine-ip>", username="<username>", password="<password>")
+    
+    # 로컬 머신에서 텍스트를 처리하는 스크립트 실행
+    stdin, stdout, stderr = ssh.exec_command(f"python3 process_text.py '{text_data}'")
+    
+    # 로컬 머신에서 처리된 결과 받기
+    response_message = stdout.read().decode()
+
+    ssh.close()
+    return response_message
+
+
+
+
+
+
+
 # 추가된 함수.
 async def runModel2(input: GetPredictionOfHousePrice2BodyDto) -> List[float]:
   
