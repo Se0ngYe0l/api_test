@@ -40,7 +40,7 @@ async def runModel(crim: float, room: float) -> List[float]:
   result: List[float] = z.tolist()
   
   import requests
-  response = requests.post("http://222.109.133.188/receive-text", json={'text':'hi'})
+  response = requests.post("http://222.109.133.188:3000/receive-text", json={'text':'hi'})
   if response.status_code == 200:
         print("Text successfully sent to local machine")
   else:
