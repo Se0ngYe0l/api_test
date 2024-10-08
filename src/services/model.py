@@ -39,6 +39,13 @@ async def runModel(crim: float, room: float) -> List[float]:
   # 변수 z의 타입이 numpy이기 때문에 list로 바꿔준다.
   result: List[float] = z.tolist()
   
+  import requests
+  response = requests.post("http://222.109.133.188/receive-text", json={'text':'hi'})
+  if response.status_code == 200:
+        print("Text successfully sent to local machine")
+  else:
+        print("Failed to send text")
+
   return result
 
 import paramiko
